@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Elegant Currency Converter</title>
   <style>
-    /* Background & Body Styling */
     body {
       background: linear-gradient(135deg, lightsteelblue, mediumslateblue);
       font-family: 'Segoe UI', sans-serif;
@@ -15,8 +14,6 @@
       align-items: center;
       margin: 0;
     }
-
-    /* Card Container */
     .converter {
       background-color: white;
       padding: 35px;
@@ -26,20 +23,15 @@
       text-align: center;
       transition: all 0.3s ease;
     }
-
     .converter:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 35px rgba(0,0,0,0.2);
     }
-
-    /* Heading */
     h1 {
       margin-bottom: 25px;
       color: darkslateblue;
       font-size: 26px;
     }
-
-    /* Inputs & Dropdowns */
     input, select {
       width: 100%;
       padding: 12px;
@@ -55,8 +47,6 @@
       border-color: mediumslateblue;
       outline: none;
     }
-
-    /* Button */
     button {
       width: 100%;
       padding: 12px;
@@ -68,12 +58,9 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
       background-color: slateblue;
     }
-
-    /* Result Box */
     .result {
       margin-top: 15px;
       font-weight: bold;
@@ -85,28 +72,22 @@
 <body>
   <div class="converter">
     <h1>Currency Converter</h1>
-
     <input type="number" id="amount" placeholder="Enter amount" />
-
     <select id="from">
       <option value="NPR">🇳🇵 NPR - Nepalese Rupee</option>
       <option value="USD">🇺🇸 USD - US Dollar</option>
       <option value="EUR">🇪🇺 EUR - Euro</option>
       <option value="INR">🇮🇳 INR - Indian Rupee</option>
     </select>
-
     <select id="to">
       <option value="USD">🇺🇸 USD - US Dollar</option>
       <option value="NPR">🇳🇵 NPR - Nepalese Rupee</option>
       <option value="EUR">🇪🇺 EUR - Euro</option>
       <option value="INR">🇮🇳 INR - Indian Rupee</option>
     </select>
-
     <button onclick="convert()">Convert</button>
-
     <div class="result" id="result"></div>
   </div>
-
   <script>
     function getRate(from, to) {
       const rates = {
@@ -117,21 +98,17 @@
       };
       return rates[from][to];
     }
-
     function convert() {
       const amount = parseFloat(document.getElementById("amount").value);
       const from = document.getElementById("from").value;
       const to = document.getElementById("to").value;
       const resultBox = document.getElementById("result");
-
       if (isNaN(amount) || amount <= 0) {
         resultBox.textContent = "Please enter a valid amount.";
         return;
       }
-
       const rate = getRate(from, to);
       const converted = amount * rate;
-
       resultBox.textContent = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
     }
   </script>
