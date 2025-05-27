@@ -15,7 +15,6 @@
       align-items: center;
       height: 100vh;
     }
-
     .container {
       background: white;
       width: 90%;
@@ -25,12 +24,10 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
-
     h1 {
       margin-bottom: 20px;
       color: #ff6f91;
     }
-
     input[type="text"] {
       width: 70%;
       padding: 12px;
@@ -39,7 +36,6 @@
       font-size: 16px;
       outline: none;
     }
-
     button {
       padding: 12px;
       background-color: #ff6f91;
@@ -51,17 +47,14 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
       background-color: #e05a7b;
     }
-
     ul {
       list-style: none;
       padding: 0;
       margin-top: 20px;
     }
-
     li {
       background-color: #ffe0e9;
       color: #333;
@@ -73,12 +66,10 @@
       align-items: center;
       transition: transform 0.2s ease;
     }
-
     li.completed {
       text-decoration: line-through;
       opacity: 0.6;
     }
-
     .btn-delete {
       background-color: #ff4b5c;
       border: none;
@@ -88,7 +79,6 @@
       cursor: pointer;
       font-size: 14px;
     }
-
     .btn-complete {
       background-color: #42ba96;
       border: none;
@@ -99,12 +89,10 @@
       font-size: 14px;
       margin-right: 6px;
     }
-
     @media (max-width: 500px) {
       input[type="text"] {
         width: 60%;
       }
-
       button {
         padding: 10px;
         font-size: 14px;
@@ -113,43 +101,35 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1>🌟 Fancy To-Do List</h1>
     <input type="text" id="taskInput" placeholder="What's next?" />
     <button onclick="addTask()">Add</button>
     <ul id="taskList"></ul>
   </div>
-
   <script>
     const taskInput = document.getElementById("taskInput");
     const taskList = document.getElementById("taskList");
-
     window.onload = () => {
       const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
       savedTasks.forEach(task => renderTask(task));
     };
-
     function addTask() {
       const text = taskInput.value.trim();
       if (text === "") return;
-
       const task = {
         id: Date.now(),
         text,
         completed: false
       };
-
       renderTask(task);
       saveTask(task);
       taskInput.value = "";
     }
-
     function renderTask(task) {
       const li = document.createElement("li");
       li.setAttribute("data-id", task.id);
       if (task.completed) li.classList.add("completed");
-
       li.innerHTML = `
         <span>${task.text}</span>
         <div>
@@ -159,23 +139,19 @@
           <button class="btn-delete" onclick="deleteTask(${task.id})">Delete</button>
         </div>
       `;
-
       taskList.appendChild(li);
     }
-
     function saveTask(task) {
       const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       tasks.push(task);
       localStorage.setItem("tasks", JSON.stringify(tasks));
     }
-
     function deleteTask(id) {
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       tasks = tasks.filter(task => task.id !== id);
       localStorage.setItem("tasks", JSON.stringify(tasks));
       document.querySelector(`[data-id='${id}']`).remove();
     }
-
     function toggleComplete(id) {
       let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       tasks = tasks.map(task => {
@@ -187,13 +163,11 @@
       localStorage.setItem("tasks", JSON.stringify(tasks));
       updateTaskList();
     }
-
     function updateTaskList() {
       taskList.innerHTML = "";
       const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
       tasks.forEach(renderTask);
     }
   </script>
-
 </body>
 </html>
